@@ -1,0 +1,1 @@
+/home/rajput/.fzf/shell/key-bindings.fish
