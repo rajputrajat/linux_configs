@@ -13,6 +13,7 @@ abbr -a ls 'exa'
 abbr -a ll 'exa -l'
 abbr -a lll 'exa -la'
 
+abbr -a grep 'rg'
 
 cd $HOME
 
@@ -66,4 +67,10 @@ if status --is-interactive
     source "$BASE16_SHELL/profile_helper.fish"
 end
 
+fish_vi_key_bindings
+
+#functions --copy fish_prompt fish_prompt_original
+#function fish_prompt; echo; fish_prompt_original; end
+#funcsave fish_prompt_original
+#funcsave fish_prompt
 

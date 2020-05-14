@@ -24,12 +24,12 @@ SET fish_color_selection:white\x1e\x2d\x2dbold\x1e\x2d\x2dbackground\x3dbrblack
 SET fish_color_user:brgreen
 SET fish_color_valid_path:\x2d\x2dunderline
 SET fish_greeting:Welcome\x20to\x20fish\x2c\x20the\x20friendly\x20interactive\x20shell
-SET fish_key_bindings:fish_default_key_bindings
+SET fish_key_bindings:fish_vi_key_bindings
 SET fish_pager_color_completion:\x1d
 SET fish_pager_color_description:B3A06D\x1eyellow
 SET fish_pager_color_prefix:white\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SET fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
-SET fish_user_abbreviations:yr\x20cal\x20\x2dy\x1ec\x20cargo\x1ee\x20nvim\x1em\x20make\x1eo\x20xdg\x2dopen\x1eg\x20git\x1egc\x20git\x20checkout\x1ega\x20git\x20add\x20\x2dp\x1evimdiff\x20nvim\x20\x2dd\x1el\x20exa\x1els\x20exa\x1ell\x20exa\x20\x2dl\x1elll\x20exa\x20\x2dla
+SET fish_user_abbreviations:yr\x20cal\x20\x2dy\x1ec\x20cargo\x1ee\x20nvim\x1em\x20make\x1eo\x20xdg\x2dopen\x1eg\x20git\x1egc\x20git\x20checkout\x1ega\x20git\x20add\x20\x2dp\x1evimdiff\x20nvim\x20\x2dd\x1el\x20exa\x1els\x20exa\x1ell\x20exa\x20\x2dl\x1elll\x20exa\x20\x2dla\x1egrep\x20rg
 SET fish_user_paths:/home/rajput/\x2efzf/bin
 SET pure_begin_prompt_with_current_directory:true
 SET pure_color_command_duration:pure_color_warning

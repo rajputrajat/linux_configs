@@ -1,1 +1,1 @@
-/home/rajput/.local/share/omf/themes/bobthefish/fish_prompt.fish
+/home/rajput/.local/share/omf/themes/default/fish_prompt.fish

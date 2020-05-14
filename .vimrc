@@ -1,7 +1,7 @@
 set nocompatible              " required
 filetype off                  " required
 set hidden
-set showtabline=0
+set showtabline=1
 
 " set the runtime path to include Vundle and initialize
 call plug#begin('~/.vim/plugged')
@@ -10,7 +10,7 @@ call plug#begin('~/.vim/plugged')
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
-Plug 'gmarik/Vundle.vim'                  " Vundle Plugin Manager
+"Plug 'gmarik/Vundle.vim'                  " Vundle Plugin Manager
 
 " Add all your plugins here (note older versions of Vundle used Bundle instead of Plugin)
 "-------------------=== Code/Project navigation ===-------------
@@ -33,6 +33,7 @@ Plug 'roxma/nvim-yarp'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -58,23 +59,19 @@ Plug 'kien/rainbow_parentheses.vim'       " Rainbow Parentheses
 "Plug 'ryanoasis/vim-devicons'             " Dev Icons
 Plug 'mhinz/vim-startify'                 " Vim Start Page
 
-
-"-------------------=== Snippets support ===--------------------
-"Plug 'garbas/vim-snipmate'                " Snippets manager
-"Plug 'MarcWeber/vim-addon-mw-utils'       " dependencies #1
-"Plug 'tomtom/tlib_vim'                    " dependencies #2
-"Plug 'honza/vim-snippets'                 " snippets repo
+Plug 'jremmen/vim-ripgrep'
+Plug 'mtdl9/vim-log-highlighting'
 
 "-------------------=== Languages support ===-------------------
 Plug 'scrooloose/nerdcommenter'           " Easy code documentation
 Plug 'mitsuhiko/vim-sparkup'              " Sparkup(XML/jinja/htlm-django/etc.) support
 
 "-------------------=== Python  ===-----------------------------
-Plug 'klen/python-mode'                   " Python mode (docs, refactor, lints...)
+"Plug 'klen/python-mode'                   " Python mode (docs, refactor, lints...)
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'mitsuhiko/vim-python-combined'
 Plug 'mitsuhiko/vim-jinja'
-Plug 'jmcantrell/vim-virtualenv'
+"Plug 'jmcantrell/vim-virtualenv'
 
 " All of your Plugins must be added before the following line
 call plug#end()                           " required
@@ -100,19 +97,12 @@ syntax enable                               " enable syntax highlighting
 let g:loaded_python_provider = 1
 set shell=/bin/bash
 set number                                  " show line numbers
+set numberwidth=6
 set ruler
 set ttyfast                                 " terminal acceleration
 
-set tabstop=4                               " 4 whitespaces for tabs visual presentation
-set shiftwidth=4                            " shift lines by 4 spaces
-set smarttab                                " set tabs for a shifttabs logic
-set expandtab                               " expand tabs into spaces
-set autoindent                              " indent when moving to the next line while writing code
-
 set cursorline                              " shows line under the cursor's line
 set showmatch                               " shows matching part of bracket pairs (), [], {}
-
-set enc=utf-8	                            " utf-8 by default
 
 set nobackup 	                            " no backup files
 set nowritebackup                           " only in case you don't want a backup file while editing
@@ -169,10 +159,6 @@ let g:comfortable_motion_scroll_down_key = "j"
 let g:comfortable_motion_scroll_up_key = "k"
 let g:comfortable_motion_no_default_key_mappings = 1
 let g:comfortable_motion_impulse_multiplier = 25  " Feel free to increase/decrease this value.
-"nnoremap <silent> <C-d> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * 2)<CR>
-"nnoremap <silent> <C-u> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * -2)<CR>
-"nnoremap <silent> <C-f> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * 4)<CR>
-"nnoremap <silent> <C-b> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * -4)<CR>
 
 "=====================================================
 "" AirLine settings
@@ -186,6 +172,8 @@ let g:airline_powerline_fonts=1
 "=====================================================
 let g:tagbar_autofocus=0
 let g:tagbar_width=42
+
+
 autocmd BufEnter *.py :call tagbar#autoopen(0)
 autocmd BufWinLeave *.py :TagbarClose
 
@@ -222,62 +210,6 @@ let g:NERDTrimTrailingWhitespace = 1
 
 
 "=====================================================
-"" DevIcon Settings
-"=====================================================
-" loading the plugin 
-"let g:webdevicons_enable = 1
-
-" adding the flags to NERDTree 
-"let g:webdevicons_enable_nerdtree = 1
-
-" adding to vim-airline's tabline
-"let g:webdevicons_enable_airline_tabline = 1
-
-" adding to vim-airline's statusline
-"let g:webdevicons_enable_airline_statusline = 1
-
-" turn on/off file node glyph decorations (not particularly useful)
-"let g:WebDevIconsUnicodeDecorateFileNodes = 1
-
-" use double-width(1) or single-width(0) glyphs 
-" only manipulates padding, has no effect on terminal or set(guifont) font
-"let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
-
-" whether or not to show the nerdtree brackets around flags 
-"let g:webdevicons_conceal_nerdtree_brackets = 0
-
-" the amount of space to use after the glyph character (default ' ')
-"let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
-
-" Force extra padding in NERDTree so that the filetype icons line up vertically
-"let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1 
-
-" change the default character when no match found
-"let g:WebDevIconsUnicodeDecorateFileNodesDefaultSymbol = 'ƛ'
-
-" set a byte character marker (BOM) utf-8 symbol when retrieving file encoding
-" disabled by default with no value
-"let g:WebDevIconsUnicodeByteOrderMarkerDefaultSymbol = ''
-
-" enable folder/directory glyph flag (disabled by default with 0)
-"let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-
-" enable open and close folder/directory glyph flags (disabled by default with 0)
-"let g:DevIconsEnableFoldersOpenClose = 1
-
-" enable pattern matching glyphs on folder/directory (enabled by default with 1)
-"let g:DevIconsEnableFolderPatternMatching = 1
-
-" enable file extension pattern matching glyphs on folder/directory (disabled by default with 0)
-"let g:DevIconsEnableFolderExtensionPatternMatching = 0
-
-
-"=====================================================
-"" SnipMate settings
-"=====================================================
-let g:snippets_dir='~/.vim/vim-snippets/snippets'
-
-"=====================================================
 "" Rainbow Parentheses Autoload 
 "=====================================================
 au VimEnter * RainbowParenthesesToggle
@@ -288,89 +220,18 @@ au Syntax * RainbowParenthesesLoadBraces
 "=====================================================
 "" Indent Guides Settings 
 "=====================================================
-set listchars=tab:›\ ,trail:•,extends:#,nbsp:.
-"=====================================================
-"" Python settings
-"=====================================================
-
-" python executables for different plugins
-let g:pymode_python='python'
-
+"set listchars=tab:›\ ,trail:•,extends:#,nbsp:.
 
 nmap <leader>g :YcmCompleter GoTo<CR>
 nmap <leader>d :YcmCompleter GoToDefinition<CR>
 
 let g:ale_emit_conflict_warnings = 0
 let g:airline#extensions#ale#enabled = 1
-let g:pymode_rope_lookup_project = 0
 let g:airline#extensions#tabline#enabled = 1
-
-" rope
-let g:pymode_rope=0
-let g:pymode_rope_completion=0
-let g:pymode_rope_complete_on_dot=0
-let g:pymode_rope_auto_project=0
-let g:pymode_rope_enable_autoimport=0
-let g:pymode_rope_autoimport_generate=0
-let g:pymode_rope_guess_project=0
-
-" documentation
-let g:pymode_doc=0
-let g:pymode_doc_bind='K'
-
-" lints
-let g:pymode_lint=0
-
-" virtualenv
-let g:pymode_virtualenv=1
-
-" breakpoints
-let g:pymode_breakpoint=1
-let g:pymode_breakpoint_key='<leader>b'
-
-" syntax highlight
-let g:pymode_syntax=1
-let g:pymode_syntax_slow_sync=1
-let g:pymode_syntax_all=1
-let g:pymode_syntax_print_as_function=g:pymode_syntax_all
-let g:pymode_syntax_highlight_async_await=g:pymode_syntax_all
-let g:pymode_syntax_highlight_equal_operator=g:pymode_syntax_all
-let g:pymode_syntax_highlight_stars_operator=g:pymode_syntax_all
-let g:pymode_syntax_highlight_self=g:pymode_syntax_all
-let g:pymode_syntax_indent_errors=g:pymode_syntax_all
-let g:pymode_syntax_string_formatting=g:pymode_syntax_all
-let g:pymode_syntax_space_errors=g:pymode_syntax_all
-let g:pymode_syntax_string_format=g:pymode_syntax_all
-let g:pymode_syntax_string_templates=g:pymode_syntax_all
-let g:pymode_syntax_doctests=g:pymode_syntax_all
-let g:pymode_syntax_builtin_objs=g:pymode_syntax_all
-let g:pymode_syntax_builtin_types=g:pymode_syntax_all
-let g:pymode_syntax_highlight_exceptions=g:pymode_syntax_all
-let g:pymode_syntax_docstrings=g:pymode_syntax_all
-
-" highlight 'long' lines (>= 80 symbols) in python files
-"augroup vimrc_autocmds
-"    autocmd!
-"    autocmd FileType python,rst,c,cpp highlight Excess ctermbg=DarkGrey guibg=Black
-"    autocmd FileType python,rst,c,cpp match Excess /\%81v.*/
-"    autocmd FileType python,rst,c,cpp set nowrap
-"    autocmd FileType python,rst,c,cpp set colorcolumn=80
-"augroup END
-
-" code folding
-let g:pymode_folding=0
-
-" pep8 indents
-let g:pymode_indent=1
-
-" code running
-let g:pymode_run=1
-let g:pymode_run_bind='<F5>'
 
 let g:ale_sign_column_always = 0
 let g:ale_emit_conflict_warnings = 0                                                                         
 let g:airline#extensions#ale#enabled = 1
-let g:pymode_rope_lookup_project = 0
 let g:airline#extensions#tabline#enabled = 1
 
 imap <F5> <Esc>:w<CR>:!clear;python %<CR>
@@ -389,7 +250,6 @@ vno <down> <Nop>
 vno <left> <Nop>
 vno <right> <Nop>
 vno <up> <Nop>
-
 
 autocmd StdinReadPre * let g:isReadingFromStdin = 1
 autocmd VimEnter * nested if !argc() && !exists('g:isReadingFromStdin') | Startify | endif
@@ -418,4 +278,33 @@ let base16colorspace=256  " Access colors present in 256 colorspace
 "nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 "nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
+set grepprg=rg\ --no-heading\ --vimgrep
+set grepformat=%f:%l:%c:%m
 
+set grepprg=rg\ --no-heading\ --vimgrep
+set grepformat=%f:%l:%c:%m
+
+let g:ycm_show_diagnostics_ui = 0
+
+
+"set smartindent
+set tabstop=4                               " 4 whitespaces for tabs visual presentation
+set shiftwidth=4                            " shift lines by 4 spaces
+"set smarttab                                " set tabs for a shifttabs logic
+"set expandtab                               " expand tabs into spaces
+"set autoindent                              " indent when moving to the next line while writing code
+
+"let g:gitgutter_highlight_lines = 1
+let g:gitgutter_highlight_linenrs = 1
+highlight SignColumn ctermbg=DarkGrey
+let g:gitgutter_diff_args = '-w'
+
+set updatetime=2000
+let g:gitgutter_max_signs = 500
+let g:gitgutter_map_keys = 0
+let g:gitgutter_override_sign_column_highlight = 0
+highlight clear SignColumn
+highlight GitGutterAdd ctermfg=2
+highlight GitGutterChange ctermfg=3
+highlight GitGutterDelete ctermfg=1
+highlight GitGutterChangeDelete ctermfg=4

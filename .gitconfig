@@ -1,0 +1,11 @@
+[user]
+	email = rajputrajat@gmail.com
+	name = Rajat Rajput
+[diff]
+	tool = vimdiff
+[merge]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[alias]
+	d = diff
